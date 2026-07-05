@@ -1,0 +1,13 @@
+{
+  "name": "tech-ai-friends",
+  "version": "1.0.0",
+  "description": "Tech & AI Friends Club website",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site — no build step'",
+    "preview": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
