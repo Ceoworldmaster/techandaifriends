@@ -1,0 +1,231 @@
+/* ============================================================
+   MICRO-INTERACTIONS.CSS
+   Bộ hiệu ứng chuyển động dùng chung: hover, active/click, loading.
+   Nguyên tắc: 200–300ms, cubic-bezier có quán tính (không linear),
+   chỉ animate transform/opacity để giữ hiệu năng (GPU-accelerated),
+   không ảnh hưởng layout (không animate width/height/top/left).
+   ============================================================ */
+
+:root {
+    /* Dùng chung 1 timing function "có quán tính" cho toàn bộ hiệu ứng.
+       cubic-bezier(.4,0,.2,1) = "ease-in-out" mượt, tăng tốc rồi giảm tốc êm. */
+    --mi-ease: cubic-bezier(.4, 0, .2, 1);
+    --mi-spring: cubic-bezier(.34, 1.56, .64, 1);
+    /* nảy nhẹ (overshoot) cho nút CTA */
+    --mi-fast: .2s;
+    --mi-med: .28s;
+}
+
+/* ------------------------------------------------------------
+   1. HOVER — Icon menu / navigation
+   Hiệu ứng: icon nở nhẹ (scale) + trượt lên 1-2px + đường gạch chân
+   chạy từ giữa ra hai bên (thay vì đổi màu đột ngột).
+   Cách dùng: bọc icon trong <span class="mi-nav-item"><span class="mi-nav-icon">...</span>Label</span>
+------------------------------------------------------------- */
+.mi-nav-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mi-nav-item .mi-nav-icon {
+    display: inline-block;
+    transition: transform var(--mi-fast) var(--mi-ease);
+    /* transform-origin ở giữa để scale không bị lệch */
+    transform-origin: center;
+}
+
+.mi-nav-item:hover .mi-nav-icon {
+    /* Nở nhẹ + nhích lên trên, cảm giác icon "sống" */
+    transform: translateY(-2px) scale(1.12);
+}
+
+/* Đường gạch chân chạy mượt từ giữa ra ngoài, không "bật" đột ngột */
+.mi-nav-item::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--grad-brand-h, linear-gradient(90deg, #00D2FF, #7928CA));
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: center;
+    transition: transform var(--mi-med) var(--mi-ease);
+}
+
+.mi-nav-item:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* ------------------------------------------------------------
+   2. HOVER — CTA Button (nút hành động chính)
+   Hiệu ứng: mũi tên bên trong nút tiến nhẹ về phía trước khi hover,
+   toàn thân nút "nảy" lên rất nhẹ (bounce) để gợi ý hành động click.
+   Cách dùng: <button class="mi-cta">Xem thêm <span class="mi-cta-arrow">→</span></button>
+------------------------------------------------------------- */
+.mi-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: transform var(--mi-med) var(--mi-spring),
+        box-shadow var(--mi-med) var(--mi-ease);
+}
+
+.mi-cta-arrow {
+    display: inline-block;
+    transition: transform var(--mi-fast) var(--mi-ease);
+}
+
+.mi-cta:hover {
+    /* dùng easing "spring" (mi-spring) để có 1 chút nảy tự nhiên, không cứng */
+    transform: translateY(-2px);
+}
+
+.mi-cta:hover .mi-cta-arrow {
+    transform: translateX(4px);
+}
+
+/* ------------------------------------------------------------
+   3. ACTIVE/CLICK — Ripple effect (gợn sóng tỏa từ tâm)
+   Cách dùng (JS bắt buộc để định vị tâm gợn sóng theo điểm click):
+     document.querySelectorAll('.mi-ripple').forEach(el => {
+       el.addEventListener('click', function (e) {
+         const r = document.createElement('span');
+         r.className = 'mi-ripple-dot';
+         const rect = this.getBoundingClientRect();
+         const size = Math.max(rect.width, rect.height);
+         r.style.width = r.style.height = size + 'px';
+         r.style.left = (e.clientX - rect.left - size / 2) + 'px';
+         r.style.top  = (e.clientY - rect.top  - size / 2) + 'px';
+         this.appendChild(r);
+         r.addEventListener('animationend', () => r.remove());
+       });
+     });
+   Phần tử cha cần có: position: relative; overflow: hidden;
+------------------------------------------------------------- */
+.mi-ripple {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    /* ép GPU layer để animation mượt */
+}
+
+.mi-ripple-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .55);
+    transform: scale(0);
+    pointer-events: none;
+    animation: mi-ripple-anim .55s var(--mi-ease) forwards;
+}
+
+@keyframes mi-ripple-anim {
+    to {
+        transform: scale(2.6);
+        opacity: 0;
+    }
+}
+
+/* ------------------------------------------------------------
+   3b. ACTIVE/CLICK — Press-down (lún nhẹ khi nhấn, không cần JS)
+   Cách dùng: thêm class "mi-press" vào bất kỳ nút/icon nào.
+------------------------------------------------------------- */
+.mi-press {
+    transition: transform var(--mi-fast) var(--mi-ease);
+}
+
+.mi-press:active {
+    transform: scale(.92);
+}
+
+/* ------------------------------------------------------------
+   4. LOADING — Skeleton shimmer (thay cho vòng xoay đơn điệu)
+   Cách dùng: <div class="mi-skeleton" style="width:120px;height:14px;"></div>
+------------------------------------------------------------- */
+.mi-skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--r-sm, 8px);
+    background: rgba(0, 210, 255, .08);
+}
+
+.mi-skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    /* dải sáng "lướt" liên tục qua khối skeleton */
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(0, 210, 255, .25) 45%,
+            rgba(121, 40, 202, .25) 55%,
+            transparent 100%);
+    transform: translateX(-100%);
+    animation: mi-shimmer 1.4s var(--mi-ease) infinite;
+}
+
+@keyframes mi-shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* ------------------------------------------------------------
+   4b. LOADING — Pulse dots (3 chấm nảy nhịp nhàng, mượt hơn spinner)
+   Cách dùng: <span class="mi-dots"><i></i><i></i><i></i></span>
+------------------------------------------------------------- */
+.mi-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mi-dots i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    display: inline-block;
+    animation: mi-dot-bounce 1s var(--mi-ease) infinite;
+}
+
+.mi-dots i:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.mi-dots i:nth-child(3) {
+    animation-delay: .3s;
+}
+
+@keyframes mi-dot-bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(.6);
+        opacity: .4;
+    }
+
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Respect người dùng tắt hiệu ứng chuyển động (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+
+    .mi-nav-item .mi-nav-icon,
+    .mi-nav-item::after,
+    .mi-cta,
+    .mi-cta-arrow,
+    .mi-press,
+    .mi-ripple-dot,
+    .mi-skeleton::after,
+    .mi-dots i {
+        animation-duration: .001ms !important;
+        transition-duration: .001ms !important;
+    }
+}
