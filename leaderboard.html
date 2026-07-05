@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng xếp hạng — Tech & AI Friends</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/leaderboard.css" />
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-brand-icon">🤖</div>
+    <span>Tech &amp; <span class="accent">AI</span> Friends</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Trang chủ</a>
+    <a href="members.html">Thành viên</a>
+    <a href="activities.html">Hoạt động</a>
+    <a href="leaderboard.html" class="active">Bảng xếp hạng</a>
+    <a href="join.html">Gia nhập</a>
+  </div>
+  <div class="nav-actions">
+    <a id="nav-admin-link" href="admin.html" class="btn btn-sm btn-outline" style="display:none">⚙ Quản trị</a>
+    <a id="nav-login-btn" href="login.html" class="btn btn-sm btn-primary">Đăng nhập</a>
+    <button id="nav-logout-btn" class="btn btn-sm btn-outline" style="display:none">Đăng xuất</button>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span></button>
+</nav>
+
+<main>
+  <!-- Hero -->
+  <section class="lb-hero">
+    <div class="lb-hero-bg"></div>
+    <div class="lb-hero-orb lb-orb-1"></div>
+    <div class="lb-hero-orb lb-orb-2"></div>
+    <div class="container lb-hero-body">
+      <div class="lb-eyebrow fade-up"><span class="eyebrow-dot"></span> Gamification</div>
+      <h1 class="fade-up fade-up-d1">Bảng xếp hạng <span class="gradient-text">Vinh danh</span></h1>
+      <p class="lb-lead fade-up fade-up-d2">Top thành viên tích lũy điểm nhiều nhất qua các hoạt động của CLB.</p>
+
+      <!-- Top 3 podium -->
+      <div class="lb-podium fade-up fade-up-d3" id="lb-podium">
+        <div class="podium-loading">
+          <div class="spinner spinner-dark spinner-lg"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter + Full Table -->
+  <section class="lb-table-section">
+    <div class="container">
+      <div class="lb-controls">
+        <div class="lb-tabs" id="lb-tabs">
+          <button class="lb-tab active" data-term="">Tất cả</button>
+        </div>
+        <div class="lb-search-wrap">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text-400);pointer-events:none;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="lb-search" placeholder="Tìm thành viên..." class="lb-search-input" />
+        </div>
+      </div>
+
+      <!-- My rank banner (shown when logged in) -->
+      <div class="my-rank-banner" id="my-rank-banner" style="display:none">
+        <div class="mrb-left">
+          <div class="mrb-avatar" id="mrb-avatar">?</div>
+          <div>
+            <div class="mrb-name" id="mrb-name">--</div>
+            <div class="mrb-sub">Thứ hạng của bạn</div>
+          </div>
+        </div>
+        <div class="mrb-right">
+          <div class="mrb-rank" id="mrb-rank">#--</div>
+          <div class="mrb-pts" id="mrb-pts">-- điểm</div>
+        </div>
+      </div>
+
+      <!-- Leaderboard table -->
+      <div class="lb-table-wrap">
+        <table class="lb-table" id="lb-table">
+          <thead>
+            <tr>
+              <th class="th-rank">Hạng</th>
+              <th class="th-member">Thành viên</th>
+              <th class="th-term">Nhiệm kỳ</th>
+              <th class="th-role">Chức vụ</th>
+              <th class="th-badge">Huy hiệu</th>
+              <th class="th-pts">Điểm</th>
+              <th class="th-bar"></th>
+            </tr>
+          </thead>
+          <tbody id="lb-tbody">
+            <tr><td colspan="7" class="lb-loading-cell">
+              <div class="spinner spinner-dark" style="margin:0 auto;"></div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Badge legend -->
+      <div class="badge-legend">
+        <h4>Hệ thống Huy hiệu</h4>
+        <div class="badge-legend-grid">
+          <div class="bl-item">
+            <span class="mc-badge mc-badge-bronze">🥉 Tân binh AI</span>
+            <span>0 – 100 điểm</span>
+          </div>
+          <div class="bl-item">
+            <span class="mc-badge mc-badge-silver">🥈 Code Master</span>
+            <span>101 – 300 điểm</span>
+          </div>
+          <div class="bl-item">
+            <span class="mc-badge mc-badge-gold">✨ AI Specialist</span>
+            <span>300+ điểm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Profile Drawer -->
+<div class="profile-drawer-overlay" id="pd-overlay">
+  <div class="profile-drawer" id="profile-drawer">
+    <button class="pd-close" id="pd-close">✕</button>
+    <div class="pd-body" id="pd-body">
+      <div class="pd-loading">
+        <div class="spinner spinner-dark spinner-lg"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name"><div class="footer-brand-logo">🤖</div> Tech &amp; AI Friends</div>
+        <p>Câu lạc bộ Công nghệ và Trí tuệ nhân tạo.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Điều hướng</h5>
+        <a href="index.html">Trang chủ</a>
+        <a href="members.html">Thành viên</a>
+        <a href="leaderboard.html">Bảng xếp hạng</a>
+        <a href="activities.html">Hoạt động</a>
+      </div>
+      <div class="footer-col">
+        <h5>Tham gia</h5>
+        <a href="join.html">Đăng ký CLB</a>
+        <a href="login.html">Đăng nhập</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Tech &amp; AI Friends Club. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/js/leaderboard.js"></script>
+</body>
+</html>

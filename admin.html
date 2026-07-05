@@ -11,7 +11,6 @@
 
 <div class="admin-sidebar-overlay" id="sidebar-overlay"></div>
 
-<!-- Sidebar -->
 <aside class="admin-sidebar" id="admin-sidebar">
   <div class="sidebar-brand">
     <div class="sidebar-brand-inner">
@@ -22,28 +21,21 @@
       </div>
     </div>
   </div>
-
   <nav class="sidebar-nav">
-    <div class="sidebar-section-label">Chức năng</div>
-    <button class="sidebar-nav-item active" data-tab="personnel">
-      <span class="nav-icon">👥</span> Quản lý Nhân sự
-    </button>
-    <button class="sidebar-nav-item" data-tab="publish">
-      <span class="nav-icon">📰</span> Xuất bản Báo chí
-    </button>
+    <div class="sidebar-section-label">Quản lý</div>
+    <button class="sidebar-nav-item active" data-tab="personnel"><span class="nav-icon">👥</span> Nhân sự &amp; Điểm</button>
+    <button class="sidebar-nav-item" data-tab="publish"><span class="nav-icon">📰</span> Xuất bản Báo chí</button>
+    <button class="sidebar-nav-item" data-tab="events"><span class="nav-icon">📅</span> Sự kiện</button>
+    <button class="sidebar-nav-item" data-tab="announcements"><span class="nav-icon">📢</span> Thông báo</button>
     <button class="sidebar-nav-item" data-tab="approvals">
       <span class="nav-icon">📋</span> Phê duyệt Ứng viên
       <span class="nav-badge" id="pending-badge" style="display:none">0</span>
     </button>
     <div class="sidebar-section-label" style="margin-top:var(--sp-1);">Điều hướng</div>
-    <a class="sidebar-nav-item" href="index.html" style="text-decoration:none;">
-      <span class="nav-icon">🏠</span> Trang chủ
-    </a>
-    <a class="sidebar-nav-item" href="members.html" style="text-decoration:none;">
-      <span class="nav-icon">👤</span> Trang thành viên
-    </a>
+    <a class="sidebar-nav-item" href="index.html" style="text-decoration:none;"><span class="nav-icon">🏠</span> Trang chủ</a>
+    <a class="sidebar-nav-item" href="leaderboard.html" style="text-decoration:none;"><span class="nav-icon">🏆</span> Bảng xếp hạng</a>
+    <a class="sidebar-nav-item" href="members.html" style="text-decoration:none;"><span class="nav-icon">👤</span> Trang thành viên</a>
   </nav>
-
   <div class="sidebar-footer">
     <div class="sidebar-user">
       <div class="sidebar-user-avatar" id="admin-avatar-initial">A</div>
@@ -52,18 +44,15 @@
         <span>Quản trị viên</span>
       </div>
     </div>
-    <button class="sidebar-logout" id="admin-logout">
-      🚪 Đăng xuất
-    </button>
+    <button class="sidebar-logout" id="admin-logout">🚪 Đăng xuất</button>
   </div>
 </aside>
 
-<!-- Main -->
 <div class="admin-main">
   <header class="admin-topbar">
     <div>
-      <h1 id="topbar-title">Quản lý Nhân sự</h1>
-      <p id="topbar-sub">Tạo tài khoản và quản lý điểm thành viên</p>
+      <h1 id="topbar-title">Nhân sự &amp; Điểm</h1>
+      <p id="topbar-sub">Quản lý tài khoản và điểm vinh danh</p>
     </div>
     <div class="topbar-right">
       <button class="admin-menu-btn" id="admin-menu-btn" title="Menu">☰</button>
@@ -71,37 +60,20 @@
   </header>
 
   <div class="admin-content">
-
-    <!-- Overview Stats -->
-    <div class="admin-stats-row" id="admin-stats-row">
-      <div class="admin-stat">
-        <div class="admin-stat-value" id="as-members">--</div>
-        <div class="admin-stat-label">Tổng thành viên</div>
-      </div>
-      <div class="admin-stat">
-        <div class="admin-stat-value" id="as-issues">--</div>
-        <div class="admin-stat-label">Số báo đã xuất bản</div>
-      </div>
-      <div class="admin-stat">
-        <div class="admin-stat-value" id="as-pending">--</div>
-        <div class="admin-stat-label">Đơn chờ duyệt</div>
-      </div>
-      <div class="admin-stat">
-        <div class="admin-stat-value" id="as-points">--</div>
-        <div class="admin-stat-label">Tổng điểm CLB</div>
-      </div>
+    <!-- Stats -->
+    <div class="admin-stats-row">
+      <div class="admin-stat"><div class="admin-stat-value" id="as-members">--</div><div class="admin-stat-label">Tổng thành viên</div></div>
+      <div class="admin-stat"><div class="admin-stat-value" id="as-issues">--</div><div class="admin-stat-label">Số báo xuất bản</div></div>
+      <div class="admin-stat"><div class="admin-stat-value" id="as-events">--</div><div class="admin-stat-label">Sự kiện đã tạo</div></div>
+      <div class="admin-stat"><div class="admin-stat-value" id="as-pending">--</div><div class="admin-stat-label">Đơn chờ duyệt</div></div>
+      <div class="admin-stat"><div class="admin-stat-value" id="as-points">--</div><div class="admin-stat-label">Tổng điểm CLB</div></div>
     </div>
 
-    <!-- ── TAB: PERSONNEL ────────────────────────────────── -->
+    <!-- ── TAB: PERSONNEL ──────────────────────────────────── -->
     <div class="admin-tab-pane active" id="tab-personnel">
-
-      <!-- Create Account -->
       <div class="admin-section">
         <div class="admin-section-header">
-          <div>
-            <h3>➕ Tạo tài khoản thành viên mới</h3>
-            <p>Tạo tài khoản đăng nhập và hồ sơ thành viên cho CLB</p>
-          </div>
+          <div><h3>➕ Tạo tài khoản thành viên mới</h3><p>Tạo tài khoản đăng nhập và hồ sơ thành viên</p></div>
         </div>
         <div class="admin-section-body">
           <form id="create-member-form" novalidate>
@@ -111,7 +83,7 @@
                 <input id="m-fullname" class="admin-input" type="text" placeholder="Nguyễn Văn A" />
               </div>
               <div class="admin-form-group">
-                <label class="admin-form-label">Email đăng nhập<span class="req">*</span></label>
+                <label class="admin-form-label">Email<span class="req">*</span></label>
                 <input id="m-email" class="admin-input" type="email" placeholder="email@example.com" />
               </div>
               <div class="admin-form-group">
@@ -119,7 +91,7 @@
                 <input id="m-password" class="admin-input" type="password" placeholder="Tối thiểu 6 ký tự" />
               </div>
               <div class="admin-form-group">
-                <label class="admin-form-label">Chức vụ<span class="req">*</span></label>
+                <label class="admin-form-label">Chức vụ</label>
                 <select id="m-role" class="admin-select">
                   <option value="Thành viên">Thành viên</option>
                   <option value="Trưởng ban">Trưởng ban</option>
@@ -128,7 +100,7 @@
                 </select>
               </div>
               <div class="admin-form-group">
-                <label class="admin-form-label">Cấp bậc hiển thị</label>
+                <label class="admin-form-label">Cấp bậc</label>
                 <select id="m-rank" class="admin-select">
                   <option value="3">3 — Thành viên</option>
                   <option value="2">2 — Trưởng ban</option>
@@ -145,42 +117,32 @@
               </div>
             </div>
             <div class="admin-form-group">
-              <label class="admin-form-label">URL ảnh đại diện (Avatar)</label>
-              <input id="m-avatar" class="admin-input" type="url" placeholder="https://... (để trống nếu dùng chữ cái)" />
+              <label class="admin-form-label">URL ảnh đại diện</label>
+              <input id="m-avatar" class="admin-input" type="url" placeholder="https://... (tuỳ chọn)" />
             </div>
-            <div class="admin-form-group" style="margin-top:var(--sp-1);">
-              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.82rem;color:rgba(255,255,255,.6);">
-                <input type="checkbox" id="m-is-admin" style="accent-color:var(--cyan);" />
-                Cấp quyền Admin cho tài khoản này
-              </label>
-            </div>
-            <button type="submit" id="create-member-btn" class="btn btn-primary" style="margin-top:var(--sp-2);">
-              ✅ Tạo tài khoản
-            </button>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:var(--sp-2);">
+              <input type="checkbox" id="m-is-admin" style="accent-color:var(--cyan);" />
+              Cấp quyền Admin
+            </label>
+            <button type="submit" id="create-member-btn" class="btn btn-primary">✅ Tạo tài khoản</button>
             <div id="create-member-msg" style="margin-top:var(--sp-1);font-size:.82rem;display:none;"></div>
           </form>
         </div>
       </div>
 
-      <!-- Members Table with Points -->
       <div class="admin-section">
         <div class="admin-section-header">
-          <div>
-            <h3>📊 Danh sách thành viên &amp; Điểm vinh danh</h3>
-            <p>Quản lý điểm tích lũy của từng thành viên</p>
+          <div><h3>📊 Thành viên &amp; Quản lý điểm</h3><p>Thêm/trừ điểm và xem lịch sử hoạt động</p></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <input type="text" id="member-search-admin" class="admin-input" placeholder="🔍 Tìm..." style="width:160px;padding:6px 12px;" />
+            <button class="btn btn-sm btn-outline" id="refresh-members-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">🔄</button>
           </div>
-          <button class="btn btn-sm btn-outline" id="refresh-members-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">
-            🔄 Làm mới
-          </button>
         </div>
         <div class="admin-section-body" style="padding:0;">
           <div class="data-table-wrapper">
             <table class="data-table">
               <thead>
-                <tr>
-                  <th>Họ tên</th><th>Chức vụ</th><th>Nhiệm kỳ</th>
-                  <th>Điểm</th><th>Thao tác điểm</th>
-                </tr>
+                <tr><th>Thành viên</th><th>Chức vụ</th><th>Nhiệm kỳ</th><th>Điểm</th><th>Cộng/Trừ điểm</th></tr>
               </thead>
               <tbody id="members-table-body">
                 <tr><td colspan="5" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr>
@@ -191,20 +153,17 @@
       </div>
     </div>
 
-    <!-- ── TAB: PUBLISH ───────────────────────────────────── -->
+    <!-- ── TAB: PUBLISH ─────────────────────────────────────── -->
     <div class="admin-tab-pane" id="tab-publish">
       <div class="admin-section">
         <div class="admin-section-header">
-          <div>
-            <h3>📤 Xuất bản số báo mới</h3>
-            <p>Upload file PDF và tạo bản ghi trên hệ thống</p>
-          </div>
+          <div><h3>📤 Xuất bản số báo mới</h3><p>Upload PDF và tạo bản ghi trên hệ thống</p></div>
         </div>
         <div class="admin-section-body">
           <form id="publish-form" novalidate>
             <div class="admin-form-grid">
               <div class="admin-form-group">
-                <label class="admin-form-label">Tiêu đề số báo<span class="req">*</span></label>
+                <label class="admin-form-label">Tiêu đề<span class="req">*</span></label>
                 <input id="pub-title" class="admin-input" type="text" placeholder="Tech & AI Magazine Số 01" />
               </div>
               <div class="admin-form-group">
@@ -214,29 +173,25 @@
             </div>
             <div class="admin-form-group">
               <label class="admin-form-label">Mô tả</label>
-              <textarea id="pub-desc" class="admin-textarea" placeholder="Giới thiệu ngắn về nội dung số báo..." rows="3"></textarea>
+              <textarea id="pub-desc" class="admin-textarea" placeholder="Nội dung số báo..." rows="3"></textarea>
             </div>
             <div class="admin-form-group">
               <label class="admin-form-label">File PDF<span class="req">*</span></label>
               <input id="pub-file" class="admin-input admin-file-input" type="file" accept=".pdf" />
             </div>
             <div class="admin-form-group">
-              <label class="admin-form-label">URL ảnh bìa (tuỳ chọn)</label>
+              <label class="admin-form-label">URL ảnh bìa</label>
               <input id="pub-cover" class="admin-input" type="url" placeholder="https://..." />
             </div>
             <div class="upload-progress" id="upload-progress">
               <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
               <div class="progress-label" id="progress-label">Đang upload...</div>
             </div>
-            <button type="submit" id="publish-btn" class="btn btn-primary" style="margin-top:var(--sp-2);">
-              📤 Xuất bản
-            </button>
+            <button type="submit" id="publish-btn" class="btn btn-primary" style="margin-top:var(--sp-2);">📤 Xuất bản</button>
             <div id="publish-msg" style="margin-top:var(--sp-1);font-size:.82rem;display:none;"></div>
           </form>
         </div>
       </div>
-
-      <!-- Published list -->
       <div class="admin-section">
         <div class="admin-section-header">
           <div><h3>📚 Danh sách đã xuất bản</h3></div>
@@ -245,12 +200,104 @@
         <div class="admin-section-body" style="padding:0;">
           <div class="data-table-wrapper">
             <table class="data-table">
-              <thead>
-                <tr><th>Số</th><th>Tiêu đề</th><th>Ngày xuất bản</th><th>PDF</th></tr>
-              </thead>
-              <tbody id="pub-table-body">
-                <tr><td colspan="4" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr>
-              </tbody>
+              <thead><tr><th>Số</th><th>Tiêu đề</th><th>Ngày xuất bản</th><th>Thao tác</th></tr></thead>
+              <tbody id="pub-table-body"><tr><td colspan="4" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: EVENTS ─────────────────────────────────────── -->
+    <div class="admin-tab-pane" id="tab-events">
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div><h3>➕ Tạo sự kiện mới</h3><p>Thêm workshop, seminar, hackathon...</p></div>
+        </div>
+        <div class="admin-section-body">
+          <form id="event-form" novalidate>
+            <div class="admin-form-group">
+              <label class="admin-form-label">Tên sự kiện<span class="req">*</span></label>
+              <input id="ev-title" class="admin-input" type="text" placeholder="Workshop: Nhập môn AI" />
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">Mô tả</label>
+              <textarea id="ev-desc" class="admin-textarea" rows="3" placeholder="Nội dung, chương trình..."></textarea>
+            </div>
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-form-label">Thời gian bắt đầu<span class="req">*</span></label>
+                <input id="ev-start" class="admin-input" type="datetime-local" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Thời gian kết thúc</label>
+                <input id="ev-end" class="admin-input" type="datetime-local" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Địa điểm</label>
+                <input id="ev-location" class="admin-input" type="text" placeholder="Phòng C101..." />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Sức chứa tối đa</label>
+                <input id="ev-capacity" class="admin-input" type="number" min="1" placeholder="30" />
+              </div>
+            </div>
+            <button type="submit" id="event-btn" class="btn btn-primary">📅 Tạo sự kiện</button>
+            <div id="event-msg" style="margin-top:var(--sp-1);font-size:.82rem;display:none;"></div>
+          </form>
+        </div>
+      </div>
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div><h3>📋 Danh sách sự kiện</h3></div>
+          <button class="btn btn-sm btn-outline" id="refresh-events-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">🔄</button>
+        </div>
+        <div class="admin-section-body" style="padding:0;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead><tr><th>Tên sự kiện</th><th>Thời gian</th><th>Địa điểm</th><th>Sức chứa</th><th>Thao tác</th></tr></thead>
+              <tbody id="events-table-body"><tr><td colspan="5" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: ANNOUNCEMENTS ─────────────────────────────── -->
+    <div class="admin-tab-pane" id="tab-announcements">
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div><h3>➕ Đăng thông báo mới</h3></div>
+        </div>
+        <div class="admin-section-body">
+          <form id="announce-form" novalidate>
+            <div class="admin-form-group">
+              <label class="admin-form-label">Tiêu đề<span class="req">*</span></label>
+              <input id="ann-title" class="admin-input" type="text" placeholder="Tiêu đề thông báo..." />
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">Nội dung<span class="req">*</span></label>
+              <textarea id="ann-content" class="admin-textarea" rows="4" placeholder="Nội dung chi tiết..."></textarea>
+            </div>
+            <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:var(--sp-2);">
+              <input type="checkbox" id="ann-pinned" style="accent-color:var(--cyan);" />
+              Ghim thông báo (hiển thị trên ticker trang chủ)
+            </label>
+            <button type="submit" id="announce-btn" class="btn btn-primary">📢 Đăng thông báo</button>
+            <div id="announce-msg" style="margin-top:var(--sp-1);font-size:.82rem;display:none;"></div>
+          </form>
+        </div>
+      </div>
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div><h3>📋 Danh sách thông báo</h3></div>
+          <button class="btn btn-sm btn-outline" id="refresh-ann-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">🔄</button>
+        </div>
+        <div class="admin-section-body" style="padding:0;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead><tr><th>Tiêu đề</th><th>Ghim</th><th>Ngày đăng</th><th>Thao tác</th></tr></thead>
+              <tbody id="ann-table-body"><tr><td colspan="4" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -261,32 +308,24 @@
     <div class="admin-tab-pane" id="tab-approvals">
       <div class="admin-section">
         <div class="admin-section-header">
-          <div>
-            <h3>📋 Đơn đăng ký gia nhập</h3>
-            <p>Duyệt hoặc từ chối các đơn ứng viên mới</p>
-          </div>
+          <div><h3>📋 Đơn đăng ký gia nhập</h3><p>Duyệt hoặc từ chối ứng viên</p></div>
           <button class="btn btn-sm btn-outline" id="refresh-apps-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">🔄 Làm mới</button>
         </div>
         <div class="admin-section-body" style="padding:0;">
           <div class="data-table-wrapper">
             <table class="data-table">
-              <thead>
-                <tr><th>Họ tên</th><th>Email</th><th>Lớp</th><th>Lý do</th><th>Ngày nộp</th><th>Trạng thái</th><th>Thao tác</th></tr>
-              </thead>
-              <tbody id="apps-table-body">
-                <tr><td colspan="7" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr>
-              </tbody>
+              <thead><tr><th>Họ tên</th><th>Email</th><th>Lớp</th><th>Lý do</th><th>Ngày nộp</th><th>Trạng thái</th><th>Thao tác</th></tr></thead>
+              <tbody id="apps-table-body"><tr><td colspan="7" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr></tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
 
-  </div><!-- /admin-content -->
-</div><!-- /admin-main -->
+  </div>
+</div>
 
 <div id="toast-container"></div>
-
 <script type="module" src="assets/js/admin.js"></script>
 </body>
 </html>
