@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hồ sơ của tôi — Tech & AI Friends</title>
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <a class="nav-brand" href="index.html">
+            <div class="nav-brand-icon">🤖</div>
+            <span>Tech &amp; <span class="accent">AI</span> Friends</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Trang chủ</a>
+            <a href="members.html">Thành viên</a>
+            <a href="activities.html">Hoạt động</a>
+            <a href="announcements.html">Thông báo</a>
+            <a href="events.html">Sự kiện</a>
+            <a href="leaderboard.html">Xếp hạng</a>
+        </div>
+        <div class="nav-actions">
+            <a id="nav-profile-link" href="profile.html" class="btn btn-sm btn-ghost active" style="display:none">👤 Hồ sơ</a>
+            <a id="nav-admin-link" href="admin.html" class="btn btn-sm btn-outline" style="display:none">⚙ Quản trị</a>
+            <a id="nav-login-btn" href="login.html" class="btn btn-sm btn-primary">Đăng nhập</a>
+            <button id="nav-logout-btn" class="btn btn-sm btn-outline" style="display:none">Đăng xuất</button>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span></button>
+    </nav>
+
+    <main>
+        <section class="simple-hero" style="padding-bottom:var(--sp-2);">
+            <div class="container">
+                <div class="hero-tag" style="display:inline-flex;margin-bottom:var(--sp-1);">👤 Tài khoản</div>
+                <h1>Hồ sơ <span class="gradient-text">của tôi</span></h1>
+            </div>
+        </section>
+
+        <div class="container page-body" style="max-width:640px;">
+            <div class="profile-card" id="profile-loading">
+                <p style="text-align:center;color:var(--text-400);">Đang tải hồ sơ...</p>
+            </div>
+
+            <div class="profile-card" id="profile-content" style="display:none;margin-bottom:var(--sp-3);">
+                <div class="profile-avatar-preview" id="pf-avatar-preview">?</div>
+                <div class="profile-stats-row">
+                    <div><div class="psr-val" id="pf-points">0</div><div class="psr-label">Điểm</div></div>
+                    <div><div class="psr-val" id="pf-role">-</div><div class="psr-label">Chức vụ</div></div>
+                    <div><div class="psr-val" id="pf-term">-</div><div class="psr-label">Nhiệm kỳ</div></div>
+                </div>
+
+                <form id="profile-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label">Họ và tên<span class="req">*</span></label>
+                        <input id="pf-fullname" class="form-input" type="text" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">URL ảnh đại diện</label>
+                        <input id="pf-avatar-url" class="form-input" type="url" placeholder="https://..." />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input id="pf-email" class="form-input" type="email" disabled style="opacity:.6;" />
+                    </div>
+                    <button type="submit" id="pf-save-btn" class="btn btn-primary" style="width:100%;">💾 Lưu thay đổi</button>
+                    <div id="pf-msg" style="margin-top:var(--sp-1);font-size:.85rem;display:none;text-align:center;"></div>
+                </form>
+            </div>
+
+            <div class="profile-card" id="password-card" style="display:none;margin-bottom:var(--sp-3);">
+                <h3 style="margin-bottom:var(--sp-2);">🔒 Đổi mật khẩu</h3>
+                <form id="password-form" novalidate>
+                    <div class="form-group">
+                        <label class="form-label">Mật khẩu mới<span class="req">*</span></label>
+                        <input id="pf-new-password" class="form-input" type="password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" />
+                    </div>
+                    <button type="submit" id="pf-pw-btn" class="btn btn-outline" style="width:100%;">Đổi mật khẩu</button>
+                    <div id="pf-pw-msg" style="margin-top:var(--sp-1);font-size:.85rem;display:none;text-align:center;"></div>
+                </form>
+            </div>
+
+            <div class="profile-card" id="history-card" style="display:none;">
+                <h3 style="margin-bottom:var(--sp-2);">📊 Lịch sử điểm gần đây</h3>
+                <div id="pf-history-list"><p style="color:var(--text-400);font-size:.85rem;">Đang tải...</p></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <span class="footer-copy">© 2025 Tech &amp; AI Friends Club. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="assets/js/profile.js"></script>
+</body>
+
+</html>
