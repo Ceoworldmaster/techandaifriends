@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản trị — Tech & AI Friends</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body class="admin-body">
+
+<div class="admin-sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- Sidebar -->
+<aside class="admin-sidebar" id="admin-sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-inner">
+      <div class="sidebar-logo">🤖</div>
+      <div class="sidebar-brand-text">
+        <strong>Tech &amp; AI Admin</strong>
+        <span>Bảng điều khiển</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-section-label">Chức năng</div>
+    <button class="sidebar-nav-item active" data-tab="personnel">
+      <span class="nav-icon">👥</span> Quản lý Nhân sự
+    </button>
+    <button class="sidebar-nav-item" data-tab="publish">
+      <span class="nav-icon">📰</span> Xuất bản Báo chí
+    </button>
+    <button class="sidebar-nav-item" data-tab="approvals">
+      <span class="nav-icon">📋</span> Phê duyệt Ứng viên
+      <span class="nav-badge" id="pending-badge" style="display:none">0</span>
+    </button>
+    <div class="sidebar-section-label" style="margin-top:var(--sp-1);">Điều hướng</div>
+    <a class="sidebar-nav-item" href="index.html" style="text-decoration:none;">
+      <span class="nav-icon">🏠</span> Trang chủ
+    </a>
+    <a class="sidebar-nav-item" href="members.html" style="text-decoration:none;">
+      <span class="nav-icon">👤</span> Trang thành viên
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" id="admin-avatar-initial">A</div>
+      <div class="sidebar-user-info">
+        <strong id="admin-display-name">Admin</strong>
+        <span>Quản trị viên</span>
+      </div>
+    </div>
+    <button class="sidebar-logout" id="admin-logout">
+      🚪 Đăng xuất
+    </button>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="admin-main">
+  <header class="admin-topbar">
+    <div>
+      <h1 id="topbar-title">Quản lý Nhân sự</h1>
+      <p id="topbar-sub">Tạo tài khoản và quản lý điểm thành viên</p>
+    </div>
+    <div class="topbar-right">
+      <button class="admin-menu-btn" id="admin-menu-btn" title="Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="admin-content">
+
+    <!-- Overview Stats -->
+    <div class="admin-stats-row" id="admin-stats-row">
+      <div class="admin-stat">
+        <div class="admin-stat-value" id="as-members">--</div>
+        <div class="admin-stat-label">Tổng thành viên</div>
+      </div>
+      <div class="admin-stat">
+        <div class="admin-stat-value" id="as-issues">--</div>
+        <div class="admin-stat-label">Số báo đã xuất bản</div>
+      </div>
+      <div class="admin-stat">
+        <div class="admin-stat-value" id="as-pending">--</div>
+        <div class="admin-stat-label">Đơn chờ duyệt</div>
+      </div>
+      <div class="admin-stat">
+        <div class="admin-stat-value" id="as-points">--</div>
+        <div class="admin-stat-label">Tổng điểm CLB</div>
+      </div>
+    </div>
+
+    <!-- ── TAB: PERSONNEL ────────────────────────────────── -->
+    <div class="admin-tab-pane active" id="tab-personnel">
+
+      <!-- Create Account -->
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div>
+            <h3>➕ Tạo tài khoản thành viên mới</h3>
+            <p>Tạo tài khoản đăng nhập và hồ sơ thành viên cho CLB</p>
+          </div>
+        </div>
+        <div class="admin-section-body">
+          <form id="create-member-form" novalidate>
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-form-label">Họ và tên<span class="req">*</span></label>
+                <input id="m-fullname" class="admin-input" type="text" placeholder="Nguyễn Văn A" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Email đăng nhập<span class="req">*</span></label>
+                <input id="m-email" class="admin-input" type="email" placeholder="email@example.com" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Mật khẩu<span class="req">*</span></label>
+                <input id="m-password" class="admin-input" type="password" placeholder="Tối thiểu 6 ký tự" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Chức vụ<span class="req">*</span></label>
+                <select id="m-role" class="admin-select">
+                  <option value="Thành viên">Thành viên</option>
+                  <option value="Trưởng ban">Trưởng ban</option>
+                  <option value="Phó Chủ nhiệm">Phó Chủ nhiệm</option>
+                  <option value="Chủ nhiệm">Chủ nhiệm</option>
+                </select>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Cấp bậc hiển thị</label>
+                <select id="m-rank" class="admin-select">
+                  <option value="3">3 — Thành viên</option>
+                  <option value="2">2 — Trưởng ban</option>
+                  <option value="1">1 — Ban Chủ nhiệm</option>
+                </select>
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Nhiệm kỳ</label>
+                <select id="m-term" class="admin-select">
+                  <option value="2024-2025">2024-2025</option>
+                  <option value="2025-2026" selected>2025-2026</option>
+                  <option value="2026-2027">2026-2027</option>
+                </select>
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">URL ảnh đại diện (Avatar)</label>
+              <input id="m-avatar" class="admin-input" type="url" placeholder="https://... (để trống nếu dùng chữ cái)" />
+            </div>
+            <div class="admin-form-group" style="margin-top:var(--sp-1);">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:.82rem;color:rgba(255,255,255,.6);">
+                <input type="checkbox" id="m-is-admin" style="accent-color:var(--cyan);" />
+                Cấp quyền Admin cho tài khoản này
+              </label>
+            </div>
+            <button type="submit" id="create-member-btn" class="btn btn-primary" style="margin-top:var(--sp-2);">
+              ✅ Tạo tài khoản
+            </button>
+            <div id="create-member-msg" style="margin-top:var(--sp-1);font-size:.82rem;display:none;"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Members Table with Points -->
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div>
+            <h3>📊 Danh sách thành viên &amp; Điểm vinh danh</h3>
+            <p>Quản lý điểm tích lũy của từng thành viên</p>
+          </div>
+          <button class="btn btn-sm btn-outline" id="refresh-members-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">
+            🔄 Làm mới
+          </button>
+        </div>
+        <div class="admin-section-body" style="padding:0;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Họ tên</th><th>Chức vụ</th><th>Nhiệm kỳ</th>
+                  <th>Điểm</th><th>Thao tác điểm</th>
+                </tr>
+              </thead>
+              <tbody id="members-table-body">
+                <tr><td colspan="5" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: PUBLISH ───────────────────────────────────── -->
+    <div class="admin-tab-pane" id="tab-publish">
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div>
+            <h3>📤 Xuất bản số báo mới</h3>
+            <p>Upload file PDF và tạo bản ghi trên hệ thống</p>
+          </div>
+        </div>
+        <div class="admin-section-body">
+          <form id="publish-form" novalidate>
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label class="admin-form-label">Tiêu đề số báo<span class="req">*</span></label>
+                <input id="pub-title" class="admin-input" type="text" placeholder="Tech & AI Magazine Số 01" />
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-form-label">Số thứ tự</label>
+                <input id="pub-issue" class="admin-input" type="number" min="1" value="1" />
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">Mô tả</label>
+              <textarea id="pub-desc" class="admin-textarea" placeholder="Giới thiệu ngắn về nội dung số báo..." rows="3"></textarea>
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">File PDF<span class="req">*</span></label>
+              <input id="pub-file" class="admin-input admin-file-input" type="file" accept=".pdf" />
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-form-label">URL ảnh bìa (tuỳ chọn)</label>
+              <input id="pub-cover" class="admin-input" type="url" placeholder="https://..." />
+            </div>
+            <div class="upload-progress" id="upload-progress">
+              <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+              <div class="progress-label" id="progress-label">Đang upload...</div>
+            </div>
+            <button type="submit" id="publish-btn" class="btn btn-primary" style="margin-top:var(--sp-2);">
+              📤 Xuất bản
+            </button>
+            <div id="publish-msg" style="margin-top:var(--sp-1);font-size:.82rem;display:none;"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Published list -->
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div><h3>📚 Danh sách đã xuất bản</h3></div>
+          <button class="btn btn-sm btn-outline" id="refresh-pub-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">🔄</button>
+        </div>
+        <div class="admin-section-body" style="padding:0;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>Số</th><th>Tiêu đề</th><th>Ngày xuất bản</th><th>PDF</th></tr>
+              </thead>
+              <tbody id="pub-table-body">
+                <tr><td colspan="4" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: APPROVALS ─────────────────────────────────── -->
+    <div class="admin-tab-pane" id="tab-approvals">
+      <div class="admin-section">
+        <div class="admin-section-header">
+          <div>
+            <h3>📋 Đơn đăng ký gia nhập</h3>
+            <p>Duyệt hoặc từ chối các đơn ứng viên mới</p>
+          </div>
+          <button class="btn btn-sm btn-outline" id="refresh-apps-btn" style="color:#fff;border-color:rgba(255,255,255,.15);">🔄 Làm mới</button>
+        </div>
+        <div class="admin-section-body" style="padding:0;">
+          <div class="data-table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr><th>Họ tên</th><th>Email</th><th>Lớp</th><th>Lý do</th><th>Ngày nộp</th><th>Trạng thái</th><th>Thao tác</th></tr>
+              </thead>
+              <tbody id="apps-table-body">
+                <tr><td colspan="7" style="text-align:center;padding:24px;color:rgba(255,255,255,.3);">Đang tải...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /admin-content -->
+</div><!-- /admin-main -->
+
+<div id="toast-container"></div>
+
+<script type="module" src="assets/js/admin.js"></script>
+</body>
+</html>

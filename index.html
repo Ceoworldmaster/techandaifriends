@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech & AI Friends Club</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
+</head>
+<body>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-brand-icon">🤖</div>
+    <span>Tech &amp; <span class="accent">AI</span> Friends</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Trang chủ</a>
+    <a href="members.html">Thành viên</a>
+    <a href="activities.html">Hoạt động</a>
+    <a href="join.html">Gia nhập</a>
+  </div>
+  <div class="nav-actions">
+    <a id="nav-admin-link" href="admin.html" class="btn btn-sm btn-outline" style="display:none">⚙ Quản trị</a>
+    <a id="nav-login-btn" href="login.html" class="btn btn-sm btn-primary">Đăng nhập</a>
+    <button id="nav-logout-btn" class="btn btn-sm btn-outline" style="display:none">Đăng xuất</button>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span></button>
+</nav>
+
+<main>
+
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section class="hero-section">
+    <div class="hero-canvas">
+      <div class="hero-mesh"></div>
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <!-- Floating particles -->
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+      <div class="particle p4"></div>
+      <div class="particle p5"></div>
+    </div>
+
+    <div class="container hero-body">
+      <div class="hero-eyebrow fade-up">
+        <span class="eyebrow-dot"></span>
+        Câu lạc bộ Công nghệ &amp; Trí tuệ nhân tạo
+      </div>
+
+      <h1 class="hero-headline fade-up fade-up-d1">
+        Nơi những người<br />
+        <span class="gradient-text">đam mê AI</span><br />
+        gặp nhau
+      </h1>
+
+      <p class="hero-lead fade-up fade-up-d2">
+        Cùng nhau học hỏi, sáng tạo và phát triển trong thế giới công nghệ không giới hạn.
+        Từ Machine Learning đến Generative AI — chúng ta khám phá tất cả.
+      </p>
+
+      <div class="hero-actions fade-up fade-up-d3">
+        <a href="join.html" class="btn btn-primary btn-xl">
+          <span>🚀</span> Gia nhập ngay
+        </a>
+        <a href="activities.html" class="btn btn-outline btn-xl">
+          <span>📰</span> Đọc tạp chí
+        </a>
+      </div>
+
+      <div class="hero-social-proof fade-up fade-up-d4">
+        <div class="hsp-avatars">
+          <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=60" alt="" />
+          <img src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=60" alt="" />
+          <img src="https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=60" alt="" />
+          <img src="https://images.pexels.com/photos/1043471/pexels-photo-1043471.jpeg?auto=compress&cs=tinysrgb&w=60" alt="" />
+        </div>
+        <div class="hsp-text">
+          <strong id="stat-members-hero">18+</strong> thành viên đang hoạt động
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating badge cards -->
+    <div class="hero-float-cards">
+      <div class="hfc hfc-1 fade-up fade-up-d2">
+        <div class="hfc-icon">🏆</div>
+        <div><div class="hfc-val" id="hfc-points">--</div><div class="hfc-label">Tổng điểm CLB</div></div>
+      </div>
+      <div class="hfc hfc-2 fade-up fade-up-d3">
+        <div class="hfc-icon">📰</div>
+        <div><div class="hfc-val" id="hfc-issues">--</div><div class="hfc-label">Số báo xuất bản</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS ─────────────────────────────────────────────── -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="stat-item" id="si-members">
+          <div class="si-value" id="stat-members">--</div>
+          <div class="si-label">Thành viên</div>
+        </div>
+        <div class="si-sep"></div>
+        <div class="stat-item">
+          <div class="si-value" id="stat-issues">--</div>
+          <div class="si-label">Số báo phát hành</div>
+        </div>
+        <div class="si-sep"></div>
+        <div class="stat-item">
+          <div class="si-value" id="stat-points">--</div>
+          <div class="si-label">Tổng điểm tích lũy</div>
+        </div>
+        <div class="si-sep"></div>
+        <div class="stat-item">
+          <div class="si-value" id="stat-applications">--</div>
+          <div class="si-label">Đơn đăng ký</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ──────────────────────────────────────────── -->
+  <section class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="tag">🎯 VỀ CHÚNG TÔI</div>
+        <h2>Tại sao chọn <span class="gradient-text">Tech &amp; AI Friends?</span></h2>
+        <p>Môi trường học tập và phát triển năng động, nơi đam mê gặp cơ hội.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feat-card feat-card-large">
+          <div class="feat-bg feat-bg-blue"></div>
+          <div class="feat-content">
+            <div class="feat-icon-wrap feat-icon-blue">🧠</div>
+            <h3>Học hỏi chuyên sâu</h3>
+            <p>Workshop, seminar thường kỳ về AI, Machine Learning, Deep Learning và các công nghệ tiên tiến nhất từ chuyên gia trong ngành.</p>
+            <a href="activities.html" class="feat-link">Xem hoạt động →</a>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-bg feat-bg-purple"></div>
+          <div class="feat-content">
+            <div class="feat-icon-wrap feat-icon-purple">🚀</div>
+            <h3>Thực chiến dự án</h3>
+            <p>Hackathon, nghiên cứu khoa học, phát triển sản phẩm AI thực tế để tích lũy kinh nghiệm.</p>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-bg feat-bg-teal"></div>
+          <div class="feat-content">
+            <div class="feat-icon-wrap feat-icon-teal">🤝</div>
+            <h3>Kết nối cộng đồng</h3>
+            <p>Mạng lưới thành viên đam mê, cùng nhau xây dựng tương lai công nghệ bền vững.</p>
+          </div>
+        </div>
+        <div class="feat-card feat-card-accent">
+          <div class="feat-bg feat-bg-grad"></div>
+          <div class="feat-content" style="color:#fff;">
+            <div class="feat-icon-wrap" style="background:rgba(255,255,255,.2);">📰</div>
+            <h3 style="color:#fff;">Tạp chí công nghệ</h3>
+            <p style="color:rgba(255,255,255,.8);">Xuất bản định kỳ tạp chí nội bộ tổng hợp kiến thức và xu hướng AI mới nhất.</p>
+            <a href="activities.html" class="feat-link" style="color:#fff;border-color:rgba(255,255,255,.3);">Đọc ngay →</a>
+          </div>
+        </div>
+        <div class="feat-card">
+          <div class="feat-bg feat-bg-orange"></div>
+          <div class="feat-content">
+            <div class="feat-icon-wrap feat-icon-orange">🏆</div>
+            <h3>Gamification</h3>
+            <p>Hệ thống điểm vinh danh và huy hiệu độc quyền — từ Tân binh AI đến AI Specialist.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA BANNER ─────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-orb cta-orb-1"></div>
+        <div class="cta-orb cta-orb-2"></div>
+        <div class="cta-content">
+          <div class="tag" style="color:#fff;border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.12);">✨ Tham gia ngay hôm nay</div>
+          <h2 style="color:#fff;margin:var(--sp-2) 0;">Sẵn sàng khám phá<br/>tương lai AI cùng chúng tôi?</h2>
+          <p style="color:rgba(255,255,255,.75);max-width:480px;margin-inline:auto;">Điền đơn đăng ký — đơn giản, nhanh chóng. Ban chủ nhiệm sẽ liên hệ trong vòng 3-5 ngày.</p>
+          <div style="display:flex;gap:var(--sp-2);justify-content:center;margin-top:var(--sp-4);flex-wrap:wrap;">
+            <a href="join.html" class="btn btn-xl" style="background:#fff;color:var(--electric);font-weight:700;box-shadow:0 8px 32px rgba(0,0,0,.2);">🚀 Đăng ký gia nhập</a>
+            <a href="members.html" class="btn btn-xl" style="background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.3);">👥 Xem thành viên</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- AI Chatbot Widget -->
+<div id="chatbot-widget">
+  <button id="chatbot-btn" aria-label="Mở AI Chatbot">
+    <span class="chatbot-icon">🤖</span>
+    <span class="chatbot-pulse"></span>
+  </button>
+  <div id="chatbot-panel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">🤖</div>
+        <div>
+          <h4>AI Companion</h4>
+          <p>● Online — Trợ lý thông minh</p>
+        </div>
+      </div>
+      <button class="chat-close" id="chat-close">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Hỏi về CLB..." autocomplete="off" />
+      <button class="chat-send" id="chat-send" aria-label="Gửi">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <div class="footer-brand-logo">🤖</div>
+          Tech &amp; AI Friends
+        </div>
+        <p>Câu lạc bộ Công nghệ và Trí tuệ nhân tạo. Nơi đam mê gặp cơ hội, sáng tạo gặp tri thức.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Điều hướng</h5>
+        <a href="index.html">Trang chủ</a>
+        <a href="members.html">Thành viên</a>
+        <a href="activities.html">Hoạt động</a>
+        <a href="join.html">Gia nhập CLB</a>
+      </div>
+      <div class="footer-col">
+        <h5>Thành viên</h5>
+        <a href="login.html">Đăng nhập</a>
+        <a href="join.html">Đăng ký</a>
+        <a href="members.html">Danh sách</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Tech &amp; AI Friends Club. All rights reserved.</span>
+      <span class="footer-made">Được xây dựng với ❤ bởi <span>Tech &amp; AI Friends</span></span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

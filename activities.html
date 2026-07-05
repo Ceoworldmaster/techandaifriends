@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoạt động & Báo chí — Tech & AI Friends</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/activities.css" />
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-brand-icon">🤖</div>
+    <span>Tech &amp; <span class="accent">AI</span> Friends</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Trang chủ</a>
+    <a href="members.html">Thành viên</a>
+    <a href="activities.html" class="active">Hoạt động</a>
+    <a href="join.html">Gia nhập</a>
+  </div>
+  <div class="nav-actions">
+    <a id="nav-admin-link" href="admin.html" class="btn btn-sm btn-outline" style="display:none">⚙ Quản trị</a>
+    <a id="nav-login-btn" href="login.html" class="btn btn-sm btn-primary">Đăng nhập</a>
+    <button id="nav-logout-btn" class="btn btn-sm btn-outline" style="display:none">Đăng xuất</button>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span></button>
+</nav>
+
+<main>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="act-hero">
+    <div class="act-hero-bg"></div>
+    <div class="act-hero-orb orb-a"></div>
+    <div class="act-hero-orb orb-b"></div>
+    <div class="container act-hero-body">
+      <div class="act-hero-text">
+        <div class="act-eyebrow fade-up">
+          <span class="eyebrow-dot"></span> Kho tư liệu Tech &amp; AI
+        </div>
+        <h1 class="fade-up fade-up-d1">
+          Hoạt động &amp; <span class="gradient-text">Báo chí</span>
+        </h1>
+        <p class="act-lead fade-up fade-up-d2">
+          Tổng hợp tạp chí nội bộ, sự kiện và hoạt động nổi bật của<br class="br-lg" /> Tech &amp; AI Friends qua các nhiệm kỳ.
+        </p>
+        <div class="act-hero-stats fade-up fade-up-d3" id="act-hero-stats">
+          <div class="ahs-item">
+            <span class="ahs-val" id="ahs-count">--</span>
+            <span class="ahs-label">Số báo</span>
+          </div>
+          <div class="ahs-sep"></div>
+          <div class="ahs-item">
+            <span class="ahs-val" id="ahs-latest">--</span>
+            <span class="ahs-label">Mới nhất</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-hero-cover fade-up fade-up-d2" id="act-hero-cover">
+        <div class="ahc-placeholder">
+          <div class="ahc-icon">📰</div>
+          <div class="ahc-text">Tạp chí Tech &amp; AI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Filter / Sort bar ────────────────────────────────────── -->
+  <div class="act-filter-bar">
+    <div class="container act-filter-inner">
+      <div class="afb-left">
+        <span class="afb-label">Sắp xếp:</span>
+        <select id="sort-select" class="afb-select">
+          <option value="newest">Mới nhất trước</option>
+          <option value="oldest">Cũ nhất trước</option>
+          <option value="issue_desc">Số lớn nhất trước</option>
+        </select>
+      </div>
+      <div class="afb-right">
+        <div class="afb-search-wrap">
+          <svg class="afb-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="act-search" class="afb-search" placeholder="Tìm kiếm tạp chí..." />
+        </div>
+        <span class="afb-count" id="afb-count"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Featured Issue ────────────────────────────────────────── -->
+  <section class="act-featured-section" id="act-featured-section" style="display:none;">
+    <div class="container">
+      <div class="act-section-title">
+        <div class="ast-line"></div>
+        <span>Số mới nhất</span>
+        <div class="ast-line"></div>
+      </div>
+      <div class="featured-card" id="featured-card"></div>
+    </div>
+  </section>
+
+  <!-- ── All Issues Grid ───────────────────────────────────────── -->
+  <section class="act-grid-section">
+    <div class="container">
+      <div class="act-section-title" id="grid-section-title" style="display:none;">
+        <div class="ast-line"></div>
+        <span>Tất cả số báo</span>
+        <div class="ast-line"></div>
+      </div>
+      <div id="magazine-grid" class="mag-grid">
+        <div class="mag-loading">
+          <div class="spinner spinner-dark spinner-lg"></div>
+          <p>Đang tải tạp chí...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── PDF Modal ──────────────────────────────────────────────── -->
+<div class="pdf-overlay" id="pdf-overlay">
+  <div class="pdf-modal" id="pdf-modal">
+
+    <!-- Header -->
+    <div class="pdfm-header">
+      <div class="pdfm-header-left">
+        <div class="pdfm-issue-chip" id="pdfm-issue">Số ?</div>
+        <div>
+          <h3 class="pdfm-title" id="pdfm-title">Đang tải...</h3>
+          <p class="pdfm-date" id="pdfm-date"></p>
+        </div>
+      </div>
+      <div class="pdfm-header-right">
+        <a class="pdfm-action-btn" id="pdfm-download" href="#" target="_blank" rel="noopener" title="Tải về">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <button class="pdfm-action-btn" id="pdfm-fullscreen" title="Toàn màn hình">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </button>
+        <button class="pdfm-close-btn" id="pdfm-close" title="Đóng">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Viewer -->
+    <div class="pdfm-viewer" id="pdfm-viewer">
+      <div class="pdfm-loading" id="pdfm-loading">
+        <div class="spinner spinner-dark spinner-lg"></div>
+        <p>Đang tải tài liệu...</p>
+      </div>
+      <iframe id="pdfm-iframe" src="" title="PDF Viewer" allowfullscreen style="display:none;"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <div class="pdfm-footer">
+      <p class="pdfm-desc" id="pdfm-desc"></p>
+      <div class="pdfm-footer-actions">
+        <button class="pdfm-nav-btn" id="pdfm-prev" disabled>← Số trước</button>
+        <button class="pdfm-nav-btn" id="pdfm-next" disabled>Số tiếp →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name">
+          <div class="footer-brand-logo">🤖</div>
+          Tech &amp; AI Friends
+        </div>
+        <p>Câu lạc bộ Công nghệ và Trí tuệ nhân tạo.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Điều hướng</h5>
+        <a href="index.html">Trang chủ</a>
+        <a href="members.html">Thành viên</a>
+        <a href="activities.html">Hoạt động</a>
+        <a href="join.html">Gia nhập CLB</a>
+      </div>
+      <div class="footer-col">
+        <h5>Thành viên</h5>
+        <a href="login.html">Đăng nhập</a>
+        <a href="join.html">Đăng ký</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Tech &amp; AI Friends Club. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/js/activities.js"></script>
+</body>
+</html>

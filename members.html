@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thành viên — Tech & AI Friends</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+  <link rel="stylesheet" href="assets/css/members.css" />
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-brand-icon">🤖</div>
+    <span>Tech &amp; <span class="accent">AI</span> Friends</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Trang chủ</a>
+    <a href="members.html" class="active">Thành viên</a>
+    <a href="activities.html">Hoạt động</a>
+    <a href="join.html">Gia nhập</a>
+  </div>
+  <div class="nav-actions">
+    <a id="nav-admin-link" href="admin.html" class="btn btn-sm btn-outline" style="display:none">⚙ Quản trị</a>
+    <a id="nav-login-btn" href="login.html" class="btn btn-sm btn-primary">Đăng nhập</a>
+    <button id="nav-logout-btn" class="btn btn-sm btn-outline" style="display:none">Đăng xuất</button>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span></button>
+</nav>
+
+<main>
+  <!-- Hero -->
+  <section class="members-hero">
+    <div class="members-hero-bg"></div>
+    <div class="members-hero-orb members-hero-orb-1"></div>
+    <div class="members-hero-orb members-hero-orb-2"></div>
+    <div class="container" style="position:relative;z-index:1;text-align:center;">
+      <div class="hero-tag" style="display:inline-flex;margin-bottom:var(--sp-2);">👥 Cộng đồng Tech &amp; AI</div>
+      <h1 style="font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:12px;">
+        Danh sách <span class="gradient-text">Thành viên</span>
+      </h1>
+      <p style="color:var(--text-500);max-width:520px;margin:0 auto;">
+        Gặp gỡ những con người tài năng đang cùng nhau xây dựng tương lai công nghệ và AI.
+      </p>
+
+      <!-- Live stats bar -->
+      <div class="members-stats-bar" id="members-stats-bar">
+        <div class="msb-item"><span class="msb-value" id="msb-total">--</span><span class="msb-label">Thành viên</span></div>
+        <div class="msb-divider"></div>
+        <div class="msb-item"><span class="msb-value" id="msb-terms">--</span><span class="msb-label">Nhiệm kỳ</span></div>
+        <div class="msb-divider"></div>
+        <div class="msb-item"><span class="msb-value" id="msb-points">--</span><span class="msb-label">Tổng điểm</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter bar -->
+  <div class="members-filter-bar">
+    <div class="container">
+      <div class="mfb-inner">
+        <span class="mfb-label">Xem theo nhiệm kỳ:</span>
+        <div class="mfb-tabs" id="term-tabs">
+          <button class="mfb-tab active" data-term="">Tất cả</button>
+        </div>
+        <div class="mfb-search-wrap">
+          <input type="text" id="member-search" class="mfb-search" placeholder="🔍 Tìm kiếm thành viên..." />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <section style="padding: var(--sp-6) 0 var(--sp-10);">
+    <div class="container">
+      <div id="members-container">
+        <div class="empty-state">
+          <div style="margin:0 auto 16px;width:40px;height:40px;" class="spinner spinner-dark"></div>
+          <h3>Đang tải dữ liệu...</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="toast-container"></div>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-name"><div class="footer-brand-logo">🤖</div> Tech &amp; AI Friends</div>
+        <p>Câu lạc bộ Công nghệ và Trí tuệ nhân tạo.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Điều hướng</h5>
+        <a href="index.html">Trang chủ</a>
+        <a href="members.html">Thành viên</a>
+        <a href="activities.html">Hoạt động</a>
+        <a href="join.html">Gia nhập CLB</a>
+      </div>
+      <div class="footer-col">
+        <h5>Thành viên</h5>
+        <a href="login.html">Đăng nhập</a>
+        <a href="join.html">Đăng ký</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Tech &amp; AI Friends Club. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="assets/js/members.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập — Tech & AI Friends</title>
+  <link rel="stylesheet" href="assets/css/global.css" />
+  <link rel="stylesheet" href="assets/css/pages.css" />
+</head>
+<body>
+
+<div class="login-bg"></div>
+
+<nav id="navbar">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-brand-icon">🤖</div>
+    <span>Tech &amp; <span class="accent">AI</span> Friends</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Trang chủ</a>
+    <a href="members.html">Thành viên</a>
+    <a href="activities.html">Hoạt động</a>
+    <a href="join.html">Gia nhập</a>
+  </div>
+  <div class="nav-actions">
+    <a id="nav-admin-link" href="admin.html" class="btn btn-sm btn-outline" style="display:none">⚙ Quản trị</a>
+    <a id="nav-login-btn" href="login.html" class="btn btn-sm btn-primary" style="display:none">Đăng nhập</a>
+    <button id="nav-logout-btn" class="btn btn-sm btn-outline" style="display:none">Đăng xuất</button>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu"><span></span></button>
+</nav>
+
+<main>
+  <div class="login-page">
+    <div class="login-card">
+      <div class="login-card-logo">
+        <div class="login-logo-icon">🤖</div>
+        <h2>Đăng nhập</h2>
+        <p>Dành cho thành viên Tech &amp; AI Friends</p>
+      </div>
+
+      <div class="login-form-error" id="login-error"></div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email</label>
+          <input id="login-email" class="form-input" type="email" placeholder="email@example.com" autocomplete="email" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Mật khẩu</label>
+          <div style="position:relative;">
+            <input id="login-password" class="form-input" type="password" placeholder="••••••••" autocomplete="current-password" required style="padding-right:44px;" />
+            <button type="button" id="toggle-pw" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text-300);font-size:1rem;" title="Hiện/Ẩn mật khẩu">👁</button>
+          </div>
+        </div>
+        <button type="submit" id="login-submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:13px;font-size:1rem;margin-top:var(--sp-1);">
+          Đăng nhập
+        </button>
+      </form>
+
+      <hr class="login-divider" />
+      <p style="text-align:center;font-size:.82rem;color:var(--text-500);">
+        Chưa có tài khoản? <a href="join.html" style="color:var(--cyan);font-weight:600;">Đăng ký gia nhập</a> và liên hệ Admin để được cấp.
+      </p>
+    </div>
+  </div>
+</main>
+
+<div id="toast-container"></div>
+
+<script type="module">
+  import { supabase } from './assets/js/config.js';
+  import { initNavbar, bindLogout, initHamburger, getProfile } from './assets/js/auth.js';
+
+  (async () => {
+    await initNavbar();
+    bindLogout();
+    initHamburger();
+
+    // If already logged in, redirect away
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const profile = await getProfile(user.id);
+      window.location.href = profile?.is_admin ? 'admin.html' : 'index.html';
+      return;
+    }
+
+    bindForm();
+  })();
+
+  function bindForm() {
+    const form   = document.getElementById('login-form');
+    const submit = document.getElementById('login-submit');
+    const errEl  = document.getElementById('login-error');
+    const togglePw = document.getElementById('toggle-pw');
+    const pwInput  = document.getElementById('login-password');
+
+    togglePw.addEventListener('click', () => {
+      pwInput.type = pwInput.type === 'password' ? 'text' : 'password';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errEl.classList.remove('show');
+
+      const email    = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        errEl.textContent = 'Vui lòng nhập đầy đủ email và mật khẩu.';
+        errEl.classList.add('show');
+        return;
+      }
+
+      submit.disabled = true;
+      submit.innerHTML = '<span class="spinner"></span> Đang đăng nhập...';
+
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+
+        const profile = await getProfile(data.user.id);
+        window.location.href = profile?.is_admin ? 'admin.html' : 'index.html';
+      } catch (err) {
+        const msgs = {
+          'Invalid login credentials': 'Email hoặc mật khẩu không đúng.',
+          'Email not confirmed': 'Email chưa được xác nhận.',
+        };
+        errEl.textContent = msgs[err.message] || err.message || 'Đăng nhập thất bại.';
+        errEl.classList.add('show');
+        submit.disabled = false;
+        submit.innerHTML = 'Đăng nhập';
+      }
+    });
+  }
+</script>
+</body>
+</html>
